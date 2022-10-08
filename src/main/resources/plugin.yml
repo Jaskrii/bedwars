@@ -1,6 +1,6 @@
 name: Bedwars
 version: '${project.version}'
-main: me.jaskri.bedwars.Bedwars
+main: me.jaskri
 api-version: 1.19
 authors: [ jaskri ]
-description: plugin bedwars
+description: plugin bedwars 1.19
