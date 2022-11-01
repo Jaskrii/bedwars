@@ -1,5 +1,6 @@
 package me.jaskri.API.events.tnt;
 
+import me.jaskri.API.Game.player.GamePlayer;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.Event;
 
