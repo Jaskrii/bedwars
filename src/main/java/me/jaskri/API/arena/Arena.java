@@ -1,10 +1,14 @@
 package me.jaskri.API.arena;
 
+import me.jaskri.API.Generator.GeneratorSpeed;
+import me.jaskri.API.Generator.Resource;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.block.Chest;
 import org.bukkit.scoreboard.Team;
 
 import javax.swing.plaf.synth.Region;
+import java.util.List;
 import java.util.Set;
 
 public interface Arena {
@@ -20,7 +24,7 @@ public interface Arena {
 
     List<Location> getResourceGenLocations(Resource var1);
 
-    SpeedGenerator getGeneratorSpeed();
+    GeneratorSpeed getGeneratorSpeed();
 
     Location getTeamShop(Team var1);
 

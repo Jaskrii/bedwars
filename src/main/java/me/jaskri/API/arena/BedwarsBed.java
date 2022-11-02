@@ -1,17 +1,18 @@
 package me.jaskri.API.arena;
 
-import jdk.internal.util.Preconditions;
+import com.google.common.base.Preconditions;
+import org.bukkit.block.Block;
 import org.bukkit.scoreboard.Team;
 
 public class BedwarsBed {
     (
-    Team team, Block head , Block foot) {
-        Preconditions.checkNotNull(team, "Bed team cannot be null!");
-        Preconditions.checkNotNull(head, "Bed head cannot be null!");
-        Preconditions.checkNotNull(foot, "Bed foot cannot be null!");
+    Team team, Blockhead , Blockfoot) {
+        com.google.common.base.Preconditions.checkNotNull(team, "Bed team cannot be null!");
+        com.google.common.base.Preconditions.checkNotNull(getHead(), "Bed head cannot be null!");
+        Preconditions.checkNotNull(getFoot(), "Bed foot cannot be null!");
         this.team = team;
-        this.getHead() = head;
-        this.foot = foot;
+        this.getHead() = getHead();
+        this.getFoot() = getFoot();
     }
 
     public Team getTeam() {
@@ -19,10 +20,10 @@ public class BedwarsBed {
     }
 
     public Block getHead() {
-        return this.head;
+        return this.getHead();
     }
 
     public Block getFoot() {
-        return this.foot;
+        return this.getFoot();
     }
 }

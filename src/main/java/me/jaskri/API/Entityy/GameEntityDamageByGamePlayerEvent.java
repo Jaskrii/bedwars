@@ -1,6 +1,7 @@
 package me.jaskri.API.Entityy;
 
 import me.jaskri.API.Entity.GameEntity;
+import me.jaskri.API.Game.player.GamePlayer;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 

@@ -1,5 +1,7 @@
 package me.jaskri.API.Entity;
 
+import me.jaskri.API.Game.Game;
+import me.jaskri.API.Game.player.GamePlayer;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.scoreboard.Team;

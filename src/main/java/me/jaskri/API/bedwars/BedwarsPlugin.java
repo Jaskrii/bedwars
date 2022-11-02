@@ -1,5 +1,13 @@
 package me.jaskri.API.bedwars;
 
+import me.jaskri.API.Entity.GameEntityManager;
+import me.jaskri.API.Game.Game;
+import me.jaskri.API.Game.GamePhase;
+import me.jaskri.API.Prestige.Prestige;
+import me.jaskri.API.ScoreBoard.Lobby.LobbyScoreBoard;
+import me.jaskri.API.Shop.Shop;
+import me.jaskri.API.Upgrade.Shop.UpgradeShop;
+import me.jaskri.API.User.User;
 import me.jaskri.API.arena.Arena;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -10,9 +18,9 @@ public interface BedwarsPlugin extends Plugin {
 
     Prestige getDefaultPrestige();
 
-    LobbyScoreboard getLobbyScoreboard();
+    LobbyScoreBoard getLobbyScoreboard();
 
-    GamePhas getGamePhase(String var1);
+    GamePhase getGamePhase(String var1);
 
     void registerGamePhase(GamePhase var1);
 

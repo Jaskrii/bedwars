@@ -1,6 +1,7 @@
 package me.jaskri.API.arena;
 
 import com.google.common.base.Preconditions;
+import me.jaskri.Util.LocationUtils;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -41,23 +42,23 @@ public class Region implements ConfigurationSerializable {
     }
 
     public double getMinX() {
-        return Math.min(this.pos1.getX(), this.pos2.getX());
+        return Math.min(this.pos1.getSpawnLocation().getX(), this.pos2.getX());
     }
 
     public double getMaxX() {
-        return Math.max(this.pos1.getX(), this.pos2.getX());
+        return Math.max(this.pos1.getSpawnLocation().getBlockX(), this.pos2.getX());
     }
 
     public double getMinY() {
-        return Math.min(this.pos1.getY(), this.pos2.getY());
+        return Math.min(this.pos1.getSpawnLocation(), this.pos2.getY());
     }
 
     public double getMaxY() {
-        return Math.max(this.pos1.getY(), this.pos2.getY());
+        return Math.max(this.pos1.getSpawnLocation().getBlockY(), this.pos2.getY());
     }
 
     public double getMinZ() {
-        return Math.min(this.pos1.getZ(), this.pos2.getZ());
+        return Math.min(this.pos1.getSpawnLocation().getZ(), this.pos2.getZ());
     }
 
     public double getMaxZ() {
@@ -85,9 +86,9 @@ public class Region implements ConfigurationSerializable {
     }
 
     public String toString() {
-        int x1 = this.pos1.getBlockX();
-        int y1 = this.pos1.getBlockY();
-        int z1 = this.pos1.getBlockZ();
+        int x1 = this.pos1.getSpawnLocation().getBlockX();
+        int y1 = this.pos1.getSpawnLocation().getBlockY()
+        int z1 = this.pos1.getSpawnLocation().getBlockZ();
         int x2 = this.pos2.getBlockX();
         int y2 = this.pos2.getBlockY();
         int z2 = this.pos2.getBlockZ();

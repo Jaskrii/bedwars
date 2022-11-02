@@ -1,5 +1,6 @@
 package me.jaskri.API.bed;
 
+import me.jaskri.API.Game.player.GamePlayer;
 import me.jaskri.API.arena.BedwarsBed;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;

@@ -11,7 +11,7 @@ public class FireBallLaunchEvent extends FireBallEvent implements Cancellable {
     private boolean isCancelled;
 
     public FireballLaunchEvent(GamePlayer owner, Fireball fireball) {
-        super(owner, fireball);
+        (owner, fireball);
     }
 
     public boolean isCancelled() {
