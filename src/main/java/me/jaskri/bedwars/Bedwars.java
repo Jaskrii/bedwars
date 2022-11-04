@@ -2,11 +2,19 @@ package me.jaskri.bedwars;
 
 import jdk.internal.platform.Metrics;
 import me.jaskri.API.Entity.GameEntityManager;
+import me.jaskri.API.Generator.GeneratorTier;
 import me.jaskri.API.Level.BedwarsLevel;
+import me.jaskri.API.NPC.NpcManager;
+import me.jaskri.API.Prestige.Prestige;
 import me.jaskri.API.arena.Arena;
 import me.jaskri.API.arena.Region;
 import me.jaskri.API.bedwars.BedwarsPlugin;
 import me.jaskri.API.bedwars.UpgradesManager;
+import me.jaskri.Commands.BedwarsCommands;
+import me.jaskri.Commands.PlayCommand;
+import me.jaskri.Commands.RejoinCommand;
+import me.jaskri.Commands.ShoutCommand;
+import me.jaskri.DataBase.Database;
 import me.jaskri.Game.AbstractGame;
 import me.jaskri.API.Game.Game;
 import me.jaskri.API.Game.GameMode;
@@ -26,21 +34,34 @@ import me.jaskri.Bedwarss.settings.BedwarsSettings;
 import me.jaskri.Bedwarss.settings.GameSettings;
 import me.jaskri.Bedwarss.settings.MapForgeSettings;
 import me.jaskri.Bedwarss.settings.TeamForgeSettings;
-import me.jaskri.Listener.GameEntityListener;
-import me.jaskri.Listener.GameMechanicsListener;
-import me.jaskri.Listener.GamePlayerChatListener;
-import me.jaskri.Listener.GamePlayerListener;
+import me.jaskri.Game.Phase.*;
+import me.jaskri.Listener.*;
+import me.jaskri.Prestige.PrestigeConfig;
+import me.jaskri.ScoreBoard.ScoreboardConfig;
+import me.jaskri.Shop.ShopConfig;
+import me.jaskri.Trap.EffectTrap;
+import me.jaskri.Upgrade.*;
+import me.jaskri.Upgrade.Shop.UpgradeShopConfig;
+import me.jaskri.User.BedwarsUser;
+import me.jaskri.Util.ChatUtils;
+import me.jaskri.Util.Version;
+import me.jaskri.bedwars.settings.BedwarsSettings;
+import me.jaskri.bedwars.settings.GameSettings;
+import me.jaskri.bedwars.settings.MapForgeSettings;
+import me.jaskri.bedwars.settings.TeamForgeSettings;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitWorker;
 import org.bukkit.util.NumberConversions;
 
@@ -66,7 +87,7 @@ public class Bedwars extends JavaPlugin implements BedwarsPlugin {
     private String prefix;
     private Version version;
     private GameEntityManager gameEntityManager;
-    private NPCManager npcmanager;
+    private NpcManager npcmanager;
 
     public Bedwars() {
     }
@@ -194,7 +215,7 @@ public class Bedwars extends JavaPlugin implements BedwarsPlugin {
 
     private void initMetrics() {
         Metrics metrics = new Metrics(this, 14317);
-        metrics.addCustomChart(new Metrics.AdvancedPie("popular_modes", new Callable<Map<String, Integer>>() {
+        me.jaskri.Util.Metrics.Metrics.Metrics.addCustomChart(new me.jaskri.Util.Metrics.Metrics.Metrics("popular_modes", new Callable<Map<String, Integer>>() {
             public Map<String, Integer> call() throws Exception {
                 Map<String, Integer> result = new HashMap(4);
                 result.put("Solo", this.getModesPlayersCount(GameMode.SOLO));
@@ -252,7 +273,7 @@ public class Bedwars extends JavaPlugin implements BedwarsPlugin {
     }
 
     private void registerCommands() {
-        this.getCommand("Bedwars").setExecutor(new BedwarsCommand());
+        this.getCommand("Bedwars").setExecutor(new BedwarsCommands());
         this.getCommand("Rejoin").setExecutor(new RejoinCommand());
         this.getCommand("Play").setExecutor(new PlayCommand());
         this.getCommand("Shout").setExecutor(new ShoutCommand());
@@ -306,7 +327,7 @@ public class Bedwars extends JavaPlugin implements BedwarsPlugin {
     private void registerGamePhases() {
         this.registerGamePhase(new DiamondUpgradePhase_2(360));
         this.registerGamePhase(new DiamondUpgradePhase_3(360));
-        this.registerGamePhase(new EmeraldUpgradePhase_2(360));
+        this.registerGamePhase(new EmeraldUpgradePhase_3(360));
         this.registerGamePhase(new EmeraldUpgradePhase_3(360));
         this.registerGamePhase(new BedBreakPhase(600));
         this.registerGamePhase(new GameEndPhase(600));
@@ -615,7 +636,7 @@ public class Bedwars extends JavaPlugin implements BedwarsPlugin {
     }
 
     private void initNPCManager() throws Exception {
-        this.npcmanager = (NPCManager)Class.forName("com.slyvr." + this.version + ".npc.NPCManager").newInstance();
+        this.npcmanager = (NpcManager) Class.forName("me.jaskri" + this.version + ".NPC.NpcManager").newInstance();
     }
 
     private void initEntityManager() throws Exception {

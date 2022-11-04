@@ -1,6 +1,8 @@
 package me.jaskri.API.Team;
 
 import me.jaskri.API.Game.Game;
+import me.jaskri.API.Trap.TrapManger;
+import me.jaskri.API.Upgrade.UpgradeManager;
 import org.bukkit.scoreboard.Team;
 
 public interface GameTeam {
@@ -11,5 +13,5 @@ public interface GameTeam {
 
     UpgradeManager getUpgradeManager();
 
-    TrapManager getTrapManager();
+    TrapManger getTrapManager();
 }

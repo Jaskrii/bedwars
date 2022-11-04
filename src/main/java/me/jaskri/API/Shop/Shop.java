@@ -1,5 +1,7 @@
 package me.jaskri.API.Shop;
 
+import me.jaskri.API.Game.player.GamePlayer;
+
 import java.util.List;
 
 public interface Shop {

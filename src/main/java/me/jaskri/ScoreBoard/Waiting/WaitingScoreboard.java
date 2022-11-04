@@ -1,5 +1,6 @@
 package me.jaskri.ScoreBoard.Waiting;
 
+import me.jaskri.API.ScoreBoard.ScoreboardAnimatedTitle;
 import me.jaskri.ScoreBoard.AbstractScoreboard;
 import me.jaskri.API.Game.Game;
 import me.jaskri.bedwars.Bedwars;
@@ -22,7 +23,7 @@ public class WaitingScoreboard extends AbstractScoreboard {
     private static final Map<Game, String> COUNTDOWN_TEXT = new ConcurrentHashMap();
     private Map<Integer, WaitingBoardLineType> line_types = new HashMap();
 
-    public WaitingScoreboard(me.jaskri.API.ScoreBoard.AnimatedTitle title) {
+    public WaitingScoreboard(ScoreboardAnimatedTitle title) {
         super(title);
     }
 

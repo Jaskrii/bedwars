@@ -1,5 +1,6 @@
 package me.jaskri.API.Shop;
 
+import me.jaskri.API.Game.player.GamePlayer;
 import me.jaskri.API.Shop.Item.Buyable;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;

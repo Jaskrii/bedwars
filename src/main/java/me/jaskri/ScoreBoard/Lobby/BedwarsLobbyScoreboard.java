@@ -1,6 +1,7 @@
 package me.jaskri.ScoreBoard.Lobby;
 
 import me.jaskri.API.Level.BedwarsLevel;
+import me.jaskri.API.ScoreBoard.ScoreboardAnimatedTitle;
 import me.jaskri.ScoreBoard.AbstractScoreboard;
 import me.jaskri.API.Prestige.Prestige;
 import me.jaskri.API.ScoreBoard.Lobby.LobbyScoreBoard;
@@ -27,7 +28,7 @@ public class BedwarsLobbyScoreboard extends AbstractScoreboard implements LobbyS
     private Map<Integer, LobbyScoreBoard.LobbyBoardLineType> line_type = new HashMap();
     private Map<Integer, Statistic> stats_line = new HashMap();
 
-    public BedwarsLobbyScoreboard(me.jaskri.API.ScoreBoard.AnimatedTitle title) {
+    public BedwarsLobbyScoreboard(ScoreboardAnimatedTitle title) {
         super(title);
     }
 

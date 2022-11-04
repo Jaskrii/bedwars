@@ -10,6 +10,10 @@ import me.jaskri.API.Game.GameMode;
 import me.jaskri.API.Generator.GeneratorSpeed;
 import me.jaskri.API.Generator.Resource;
 import me.jaskri.API.Team.Team;
+import me.jaskri.Configuration.Configuration;
+import me.jaskri.Util.ConfigUtils;
+import me.jaskri.Util.LocationUtils;
+import me.jaskri.bedwars.Bedwars;
 import org.bukkit.Location;
 import org.bukkit.block.Chest;
 import org.bukkit.configuration.ConfigurationSection;
@@ -44,7 +48,7 @@ public final class BedwarsArena extends Configuration {
     private ConfigUtils utils;
 
     public BedwarsArena(String name) {
-        super(new File(Bedwarss.getInstance().getDataFolder() + "/Arenas", name + ".yml"));
+        super(new File(Bedwars.getInstance().getDataFolder() + "/Arenas", name + ".yml"));
         Preconditions.checkNotNull(name, "Arena name cannot be null!");
         this.name = name;
         this.initArena();
@@ -593,7 +597,7 @@ public final class BedwarsArena extends Configuration {
 
     public static Set<String> getArenasNameList() {
         Set<String> result = new HashSet();
-        File directory = new File(Bedwarss.getInstance().getDataFolder() + "/Arenas");
+        File directory = new File(Bedwars.getInstance().getDataFolder() + "/Arenas");
         String[] list = directory.list();
         if (list != null) {
             String[] var3 = list;

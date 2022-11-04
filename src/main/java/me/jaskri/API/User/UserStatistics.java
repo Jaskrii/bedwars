@@ -34,11 +34,11 @@ public class UserStatistics implements Cloneable{
     }
 
     public float getFinalKillDeathRatio() {
-        Integer kills = (Integer)this.stats.get(Statistic.FINAL_KILLS);
+        Integer kills = (Integer)this.stats.get(Statistics.FINAL_KILLS);
         if (kills == null) {
             return 0.0F;
         } else {
-            Integer deaths = (Integer)this.stats.get(Statistic.FINAL_DEATHS);
+            Integer deaths = (Integer)this.stats.get(Statistics.FINAL_DEATHS);
             return deaths != null && deaths != 0 ? (float)(kills / deaths) : 0.0F;
         }
     }
@@ -75,10 +75,10 @@ public class UserStatistics implements Cloneable{
         if (stats != null) {
             this.incrementStatistic(Statistic.PLAYER_KILLS, stats.getStatistic(GameStatistic.KILLS));
             this.incrementStatistic(Statistic.DEATHS, stats.getStatistic(GameStatistic.DEATHS));
-            this.incrementStatistic(Statistic.FINAL_KILLS, stats.getStatistic(GameStatistic.FINAL_KILLS));
-            this.incrementStatistic(Statistic.FINAL_DEATHS, stats.getStatistic(GameStatistic.FINAL_DEATHS));
-            this.incrementStatistic(Statistic.BED_BROKEN, stats.getStatistic(GameStatistic.BED_BROKEN));
-            this.incrementStatistic(Statistic.BED_LOSSES, stats.getStatistic(GameStatistic.BED_LOST));
+            this.incrementStatistic(Statistics.FINAL_KILLS, stats.getStatistic(GameStatistic.FINAL_KILLS));
+            this.incrementStatistic(Statistics.FINAL_DEATHS, stats.getStatistic(GameStatistic.FINAL_DEATHS));
+            this.incrementStatistic(Statistics.BED_BROKEN, stats.getStatistic(GameStatistic.BED_BROKEN));
+            this.incrementStatistic(Statistics.BED_LOSSES, stats.getStatistic(GameStatistic.BED_LOST));
         }
     }
 
@@ -86,10 +86,10 @@ public class UserStatistics implements Cloneable{
         if (stats != null) {
             this.decrementStatistic(Statistic.PLAYER_KILLS, stats.getStatistic(GameStatistic.KILLS));
             this.decrementStatistic(Statistic.DEATHS, stats.getStatistic(GameStatistic.DEATHS));
-            this.decrementStatistic(Statistic.FINAL_KILLS, stats.getStatistic(GameStatistic.FINAL_KILLS));
-            this.decrementStatistic(Statistic.FINAL_DEATHS, stats.getStatistic(GameStatistic.FINAL_DEATHS));
-            this.decrementStatistic(Statistic.BED_BROKEN, stats.getStatistic(GameStatistic.BED_BROKEN));
-            this.decrementStatistic(Statistic.BED_LOSSES, stats.getStatistic(GameStatistic.BED_LOST));
+            this.decrementStatistic(Statistics.FINAL_KILLS, stats.getStatistic(GameStatistic.FINAL_KILLS));
+            this.decrementStatistic(Statistics.FINAL_DEATHS, stats.getStatistic(GameStatistic.FINAL_DEATHS));
+            this.decrementStatistic(Statistics.BED_BROKEN, stats.getStatistic(GameStatistic.BED_BROKEN));
+            this.decrementStatistic(Statistics.BED_LOSSES, stats.getStatistic(GameStatistic.BED_LOST));
         }
     }
 
