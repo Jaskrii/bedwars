@@ -3,6 +3,8 @@ package me.jaskri.Commands;
 import me.jaskri.API.Game.Game;
 import me.jaskri.API.Game.player.GamePlayer;
 import me.jaskri.API.events.Player.AsyncGamePlayerShoutEvent;
+import me.jaskri.Game.AbstractGame;
+import me.jaskri.Util.ChatUtils;
 import me.jaskri.bedwars.Bedwars;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -35,7 +37,7 @@ public class ShoutCommand implements CommandExecutor {
             Bukkit.getScheduler().runTaskAsynchronously(Bedwars.getInstance(), () -> {
                 Game game = AbstractGame.getPlayerGame(player);
                 if (game != null) {
-                    if (game.getMode().getTeamMax() == 1) {
+                    if (game.getMode().getValue() == 1) {
                         return;
                     }
 

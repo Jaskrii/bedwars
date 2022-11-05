@@ -1,8 +1,9 @@
 package me.jaskri.Commands.subcommands;
 
+import me.jaskri.Commands.SubCommand;
 import org.bukkit.entity.Player;
 
-public class MapSelectorCommand implements SubCommand{
+public class MapSelectorCommand implements SubCommand {
 
     public MapSelectorCommand() {
     }

@@ -2,12 +2,15 @@ package me.jaskri.Commands.subcommands;
 
 import me.jaskri.API.Prestige.Prestige;
 import me.jaskri.API.User.User;
+import me.jaskri.Commands.SubCommand;
+import me.jaskri.User.UserData;
+import me.jaskri.Util.ChatUtils;
 import me.jaskri.bedwars.Bedwars;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
-public class SetPrestigeCommand implements SubCommand{
+public class SetPrestigeCommand implements SubCommand {
 
     public SetPrestigeCommand() {
     }

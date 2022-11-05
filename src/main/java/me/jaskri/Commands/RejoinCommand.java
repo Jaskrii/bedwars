@@ -1,6 +1,7 @@
 package me.jaskri.Commands;
 
 import me.jaskri.API.Game.Game;
+import me.jaskri.Game.AbstractGame;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

@@ -2,10 +2,13 @@ package me.jaskri.Commands.subcommands;
 
 import me.jaskri.API.Team.Team;
 import me.jaskri.Arena.BedwarsArena;
+import me.jaskri.Commands.SubCommand;
+import me.jaskri.Game.AbstractGame;
+import me.jaskri.Util.ChatUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-public class SetTeamShopCommand implements SubCommand{
+public class SetTeamShopCommand implements SubCommand {
 
     public SetTeamShopCommand() {
     }

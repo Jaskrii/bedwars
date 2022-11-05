@@ -1,10 +1,11 @@
 package me.jaskri.Commands.subcommands;
 
+import me.jaskri.Commands.SubCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
-public class StatsCommand implements SubCommand{
+public class StatsCommand implements SubCommand {
 
     private static final String TEXT;
 

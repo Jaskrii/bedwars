@@ -1,6 +1,7 @@
 package me.jaskri.Manager;
 
 import com.google.common.base.Preconditions;
+import me.jaskri.Util.Version;
 import me.jaskri.bedwars.Bedwars;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -10,6 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.util.*;
 
 public class ItemManager {
@@ -177,7 +179,7 @@ public class ItemManager {
         if (!Version.getVersion().isNewAPI()) {
             try {
                 Class<?> spigot_clazz = Class.forName("org.bukkit.inventory.meta.ItemMeta.Spigot");
-                spigot = lookup.findVirtual(ItemMeta.class, "spigot", MethodType.methodType(spigot_clazz));
+                spigot = lookup.findVirtual(ItemMeta.class, "spigot", MethodType.methodType().methodType(spigot_clazz));
                 method1 = lookup.findVirtual(spigot_clazz, "setUnbreakable", MethodType.methodType(Void.TYPE, Boolean.TYPE));
                 method2 = lookup.findVirtual(spigot_clazz, "isUnbreakable", MethodType.methodType(Boolean.TYPE));
             } catch (Exception var5) {

@@ -34,10 +34,13 @@ import me.jaskri.Bedwarss.settings.BedwarsSettings;
 import me.jaskri.Bedwarss.settings.GameSettings;
 import me.jaskri.Bedwarss.settings.MapForgeSettings;
 import me.jaskri.Bedwarss.settings.TeamForgeSettings;
+import me.jaskri.Game.BedwarsGame;
 import me.jaskri.Game.Phase.*;
 import me.jaskri.Listener.*;
 import me.jaskri.Prestige.PrestigeConfig;
+import me.jaskri.ScoreBoard.Game.GameScoreboard;
 import me.jaskri.ScoreBoard.ScoreboardConfig;
+import me.jaskri.ScoreBoard.Waiting.WaitingScoreboard;
 import me.jaskri.Shop.ShopConfig;
 import me.jaskri.Trap.EffectTrap;
 import me.jaskri.Upgrade.*;
@@ -707,7 +710,7 @@ public class Bedwars extends JavaPlugin implements BedwarsPlugin {
         GamePhase.registerGamePhase(phase);
     }
 
-    public NPCManager getNPCManager() {
+    public NpcManager getNPCManager() {
         return this.npcmanager;
     }
 

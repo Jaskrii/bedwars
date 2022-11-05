@@ -8,6 +8,12 @@ import me.jaskri.API.Game.player.Stats.GameStatistic;
 import me.jaskri.API.Game.player.Stats.GameStatisticManager;
 import me.jaskri.API.Prestige.Prestige;
 import me.jaskri.API.Team.Team;
+import me.jaskri.Text.Style.TextAlign;
+import me.jaskri.Text.TextSection;
+import me.jaskri.Util.LevelUtils;
+import me.jaskri.Util.ScoreboardUtils;
+import me.jaskri.Util.TextUtils;
+import me.jaskri.bedwars.Bedwars;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -123,11 +129,11 @@ public class GameSummary {
         rewardSection.append("§lReward Summary", TextAlign.CENTER);
         rewardSection.append("");
         rewardSection.append("§7You earned", 2);
-        rewardSection.append("・" + ChatColor.GOLD + stats.getCoinsReward().getAmount() + " Bed Wars Coins", 4);
+        rewardSection.append("・" + ChatColor.GOLD + stats.getCoinsReward(3).getAmount() + " Bed Wars Coins", 4);
         rewardSection.append("");
         this.appendLevelSection(rewardSection, gp);
         rewardSection.append("");
-        rewardSection.append("§7You earned §b" + stats.getExpReward().getAmount() + " Bed Wars Experience");
+        rewardSection.append("§7You earned §b" + stats.getExpReward(3).getAmount() + " Bed Wars Experience");
         rewardSection.append("");
         rewardSection.append("§a§l▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
         return rewardSection;

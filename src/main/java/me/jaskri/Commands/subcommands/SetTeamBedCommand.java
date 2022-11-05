@@ -3,11 +3,15 @@ package me.jaskri.Commands.subcommands;
 import me.jaskri.API.arena.BedwarsBed;
 import me.jaskri.API.Team.Team;
 import me.jaskri.Arena.BedwarsArena;
+import me.jaskri.Commands.SubCommand;
+import me.jaskri.Game.AbstractGame;
+import me.jaskri.Util.BedUtils;
+import me.jaskri.Util.ChatUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-public class SetTeamBedCommand implements SubCommand{
+public class SetTeamBedCommand implements SubCommand {
 
     public SetTeamBedCommand() {
     }

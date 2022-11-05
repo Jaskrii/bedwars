@@ -2,9 +2,12 @@ package me.jaskri.Commands.subcommands;
 
 import me.jaskri.API.Game.GameMode;
 import me.jaskri.Arena.BedwarsArena;
+import me.jaskri.Commands.SubCommand;
+import me.jaskri.Game.AbstractGame;
+import me.jaskri.Util.ChatUtils;
 import org.bukkit.entity.Player;
 
-public class SetModeCommand implements SubCommand{
+public class SetModeCommand implements SubCommand {
 
     public SetModeCommand() {
     }

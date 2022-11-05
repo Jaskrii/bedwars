@@ -1,11 +1,12 @@
 package me.jaskri.Commands.subcommands;
 
 import me.jaskri.API.Team.Team;
+import me.jaskri.Commands.SubCommand;
 import me.jaskri.bedwars.Bedwars;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-public class TeamsCommand implements SubCommand{
+public class TeamsCommand implements SubCommand {
 
     private static final String TEXT;
 

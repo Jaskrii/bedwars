@@ -1,10 +1,13 @@
 package me.jaskri.ScoreBoard.Game;
 
 import me.jaskri.API.ScoreBoard.ScoreBoard;
+import me.jaskri.API.User.Statistics;
 import me.jaskri.ScoreBoard.AbstractScoreboard;
 import me.jaskri.API.Game.player.GamePlayer;
 import me.jaskri.API.Game.player.Stats.GameStatistic;
 import me.jaskri.API.Team.Team;
+import me.jaskri.Util.ChatUtils;
+import me.jaskri.Util.ScoreboardUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Statistic;
@@ -32,21 +35,21 @@ public class GameScoreboard extends AbstractScoreboard {
     public void setText(int line, String text) {
         if (text != null && this.isValidLine(line)) {
             this.line_type.put(line, ChatUtils.format(text));
-            this.line_type.put(line, GameScoreboard.GameBoardLineType.TEXT);
+            this.line_type.put(line, GameScoreboard.GameBoardLineType.getByName(Text));
         }
     }
 
     public void setStatistic(int line, GameStatistic stat) {
         if (stat != null && this.isValidLine(line)) {
             this.stat_line.put(line, stat);
-            this.line_type.put(line, GameScoreboard.GameBoardLineType.STATISTIC);
+            this.line_type.put(line, GameScoreboard.GameBoardLineType.getByName(Statistics));
         }
     }
 
     public void setTeam(int line, Team team) {
         if (team != null && this.isValidLine(line)) {
             this.team_line.put(line, team);
-            this.line_type.put(line, GameScoreboard.GameBoardLineType.TEAM);
+            this.line_type.put(line, GameScoreboard.GameBoardLineType.getByName(Team));
         }
     }
 
@@ -57,9 +60,9 @@ public class GameScoreboard extends AbstractScoreboard {
     public void setLineType(int line, GameBoardLineType type) {
         if (type != null && this.isValidLine(line)) {
             switch (type) {
-                case STATISTIC:
-                case TEAM:
-                case TEXT:
+                case Statistic:
+                case Team:
+                case Text:
                     return;
                 default:
                     this.line_type.put(line, type);
@@ -83,28 +86,28 @@ public class GameScoreboard extends AbstractScoreboard {
                 Map.Entry<Integer, GameBoardLineType> entry = (Map.Entry)var5.next();
                 int line = (Integer)entry.getKey();
                 switch ((GameBoardLineType)entry.getValue()) {
-                    case STATISTIC:
+                    case Statistics:
                         String stat = ((GameStatistic)this.stat_line.get(line)).toString();
                         if (board.getTeam(stat) == null) {
                             board.registerNewTeam(stat).addEntry(stat + ": " + ChatColor.GREEN);
                             obj.getScore(stat + ": " + ChatColor.GREEN).setScore(line);
                         }
                         break;
-                    case TEAM:
+                    case Team:
                         String team = ((Team)this.team_line.get(line)).toString();
                         if (board.getTeam(team) == null) {
                             board.registerNewTeam(team).addEntry(" " + team + ": ");
                             obj.getScore(" " + team + ": ").setScore(line);
                         }
                         break;
-                    case TEXT:
+                    case Text:
                         obj.getScore((String)this.line_type.get(line)).setScore(line);
                         break;
-                    case EMPTY:
+                    case Empty:
                         ++empty;
                         obj.getScore(ScoreboardUtils.getEmptyLine(empty)).setScore(line);
                         break;
-                    case DATE:
+                    case Date:
                         obj.getScore(ScoreboardUtils.formatDate()).setScore(line);
                         break;
                     case PHASE:
@@ -128,13 +131,13 @@ public class GameScoreboard extends AbstractScoreboard {
                 Map.Entry<Integer, GameBoardLineType> entry = (Map.Entry)var3.next();
                 int line = (Integer)entry.getKey();
                 switch ((GameBoardLineType)entry.getValue()) {
-                    case STATISTIC:
+                    case Statistics:
                         this.makeStatistic(board, gp, (GameStatistic)this.stat_line.get(line));
                         break;
-                    case TEAM:
+                    case Team:
                         this.makeTeam(board, gp, (Team)this.team_line.get(line));
                         break;
-                    case PHASE:
+                    case Phase:
                         this.makePhase(board, board.getObjective("Scoreboard"), line);
                 }
             }

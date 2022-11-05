@@ -1,10 +1,13 @@
 package me.jaskri.Commands.subcommands;
 
 import me.jaskri.Arena.BedwarsArena;
+import me.jaskri.Commands.SubCommand;
+import me.jaskri.Game.AbstractGame;
+import me.jaskri.Util.ChatUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-public class SetWaitingSpawnCommand implements SubCommand{
+public class SetWaitingSpawnCommand implements SubCommand {
 
     public SetWaitingSpawnCommand() {
     }

@@ -3,6 +3,7 @@ package me.jaskri.Generator;
 import com.google.common.base.Preconditions;
 import me.jaskri.API.Generator.DropItem;
 import me.jaskri.API.Generator.TeamGenerator;
+import me.jaskri.Listener.GamePlayerListener;
 import me.jaskri.bedwars.Bedwars;
 import org.bukkit.Location;
 import org.bukkit.Material;

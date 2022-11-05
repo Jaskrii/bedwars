@@ -1,7 +1,12 @@
 package me.jaskri.bedwars;
 
+import me.jaskri.Commands.BedwarsCommands;
+import me.jaskri.Commands.SubCommand;
+import me.jaskri.Text.TextSection;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
+import java.util.List;
 
 public class BedwarsHelp {
 
@@ -48,7 +53,7 @@ public class BedwarsHelp {
 
     static {
         String footer = "§a§l▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬";
-        List<SubCommand> list = BedwarsCommand.getSubCommandsList();
+        List<SubCommand> list = BedwarsCommands.getSubCommandsList();
         int length = (int)Math.ceil((double)list.size() / 8.0);
         PAGES = new TextSection[length];
 

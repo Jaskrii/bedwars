@@ -1,11 +1,12 @@
 package me.jaskri.Commands.subcommands;
 
+import me.jaskri.Commands.SubCommand;
 import me.jaskri.bedwars.Bedwars;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
-public class ModesCommand implements SubCommand{
+public class ModesCommand implements SubCommand {
 
     private static final String TEXT;
 

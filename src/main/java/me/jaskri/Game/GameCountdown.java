@@ -1,11 +1,18 @@
 package me.jaskri.Game;
 
+import me.jaskri.API.Game.Game;
+import me.jaskri.API.Game.GameState;
 import me.jaskri.API.ScoreBoard.ScoreBoard;
+import me.jaskri.ScoreBoard.Waiting.WaitingScoreboard;
+import me.jaskri.Util.Messages.Titles;
 import me.jaskri.bedwars.Bedwars;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -82,13 +89,13 @@ public class GameCountdown {
                     }
                 }).runTaskTimer(Bedwars.getInstance(), 0L, 20L);
                 final ScoreBoard.AnimatedTitle title = BOARD.getTitle();
-                if (title.getUpdateTicks() > 0L) {
+                if (title.getClass() > 0L) {
                     this.title = (new BukkitRunnable() {
                         public void run() {
-                            String next = title.next();
+                            String next = title.getClass();
                             Iterator var2 = GameCountdown.this.players.iterator();
 
-                            while(var2.hashNext()) {
+                            while(var2.hasNext()) {
                                 Player player = (Player)var2.next();
                                 org.bukkit.scoreboard.Scoreboard board = player.getScoreboard();
                                 Objective obj = board.getObjective(DisplaySlot.SIDEBAR);
@@ -98,7 +105,7 @@ public class GameCountdown {
                             }
 
                         }
-                    }).runTaskTimerAsynchronously(Bedwars.getInstance(), 0L, title.getUpdateTicks());
+                    }).runTaskTimerAsynchronously(Bedwars.getInstance(), 0L, title.getClass());
                 }
 
                 this.isLocked = true;

@@ -1,5 +1,7 @@
 package me.jaskri.bedwars;
 
+import me.jaskri.Manager.ItemManager;
+import me.jaskri.Util.XMaterial;
 import org.bukkit.inventory.ItemStack;
 
 public class BedwarsItems {

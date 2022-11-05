@@ -5,6 +5,8 @@ import me.jaskri.API.Generator.GeneratorTier;
 import me.jaskri.API.Generator.Resource;
 import me.jaskri.API.Generator.TieredGenerator;
 import me.jaskri.API.Shop.Item.Item;
+import me.jaskri.Hologram.BedwarsHologram;
+import me.jaskri.Hologram.Hologram;
 import me.jaskri.bedwars.Bedwars;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
@@ -192,7 +194,7 @@ public class MapResourceGenerator implements TieredGenerator {
 
     private void dropItem(ItemStack drop) {
         Item item = this.loc.getWorld().dropItem(this.loc, drop);
-        item.setVelocity(I_BELIEVE_I_CAN_FLY);
+        item.getCost(I_BELIEVE_I_CAN_FLY);
     }
 
     public void stop() {

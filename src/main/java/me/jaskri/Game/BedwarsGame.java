@@ -1,7 +1,11 @@
 package me.jaskri.Game;
 
+import me.jaskri.API.Game.Game;
+import me.jaskri.API.Game.GameManager;
 import me.jaskri.API.Generator.*;
 import me.jaskri.API.Level.BedwarsLevel;
+import me.jaskri.API.NPC.Shopkeeper;
+import me.jaskri.API.NPC.Upgrader;
 import me.jaskri.API.arena.BedwarsBed;
 import me.jaskri.API.arena.Region;
 import me.jaskri.API.Game.GameMode;
@@ -10,6 +14,16 @@ import me.jaskri.API.Game.player.ArmorType;
 import me.jaskri.API.Game.player.GamePlayer;
 import me.jaskri.API.Game.player.Stats.GameStatistic;
 import me.jaskri.API.Game.player.Stats.GameStatisticManager;
+import me.jaskri.Generator.MapResourceGenerator;
+import me.jaskri.Generator.TeamResourceGenerator;
+import me.jaskri.Hologram.BedwarsHologram;
+import me.jaskri.Hologram.Hologram;
+import me.jaskri.Listener.MapListener;
+import me.jaskri.Manager.PlayerManager;
+import me.jaskri.Player.BedwarsPlayer;
+import me.jaskri.Team.BedwarsTeam;
+import me.jaskri.Util.*;
+import me.jaskri.Util.Messages.Titles;
 import me.jaskri.bedwars.API.Generator.*;
 import me.jaskri.API.Group.Group;
 import me.jaskri.API.Prestige.Prestige;
@@ -186,7 +200,7 @@ public final class BedwarsGame extends AbstractGame{
         this.player_data.put(player.getUniqueId(), new PlayerData(gp, team));
         player.getInventory().addItem(new ItemStack[]{BedwarsItems.getInstance().getSword()});
         player.teleport(loc);
-        player.setGameMode(GameMode.SURVIVAL);
+        player.setGameMode(org.bukkit.GameMode.SURVIVAL);
         return gp;
     }
 
@@ -201,12 +215,12 @@ public final class BedwarsGame extends AbstractGame{
     }
 
     private void spawnTeamUpgrade(Location loc) {
-         upgrader = Bedwars.getInstance().getNPCManager().createUpgrader(this, loc);
-        upgrader.spawn();
+         upgraders = Bedwars.getInstance().getNPCManager().createUpgrader(this, loc);
+        upgraders.add(spawn(););
         Hologram hologram = new BedwarsHologram(loc.add(0.0, 1.0, 0.0), 0.3);
         hologram.addLine("&e&lRIGHT CLICK");
         hologram.addLine("&bSOLO UPGRADES");
-        this.upgraders.add(upgrader);
+        this.upgraders.add(upgraders);
         this.holograms.add(hologram);
     }
 
@@ -273,9 +287,9 @@ public final class BedwarsGame extends AbstractGame{
 
             GameStatisticManager stats = gp.getStatisticManager();
             userStats.incrementStatistics(stats);
-            user.setCoinsBalance(user.getCoinsBalance() + stats.getCoinsReward().getAmount());
+            user.setCoinsBalance(user.getCoinsBalance() + stats.getCoinsReward(50).getAmount(50));
             BedwarsLevel level = user.getLevel();
-            Prestige next = LevelUtils.levelUp(level, stats.getExpReward().getAmount());
+            Prestige next = LevelUtils.levelUp(level, stats.getExpReward(50).getAmount(50));
             user.setLevel(level);
             user.setPrestige(next);
             user.saveData();
@@ -288,7 +302,7 @@ public final class BedwarsGame extends AbstractGame{
                     losers.add(gp);
                 }
 
-                player.setGameMode(GameMode.ADVENTURE);
+                player.setGameMode(org.bukkit.GameMode.ADVENTURE);
                 if (instance.isEnabled()) {
                     Bukkit.getScheduler().runTaskLater(instance, () -> {
                         this.remove(player);
@@ -424,7 +438,7 @@ public final class BedwarsGame extends AbstractGame{
                 PlayerManager.resetFoodLevel(player);
                 PlayerManager.resetScoreboard(player);
                 player.teleport(this.arena.getWaitingRoomSpawnPoint());
-                player.setGameMode(GameMode.ADVENTURE);
+                player.setGameMode(org.bukkit.GameMode.ADVENTURE);
                 player.setPlayerTime((long)this.arena.getTime(), false);
                 player.getEnderChest().clear();
                 BedwarsLevel.setForPlayer(player, Bedwars.getInstance().getUser(player).getDisplayLevel());
@@ -564,7 +578,7 @@ public final class BedwarsGame extends AbstractGame{
             return false;
         } else {
             PlayerData data = (PlayerData)this.player_data.get(player.getUniqueId());
-            return data != null ? data.isEliminated : true;
+            return data != null ? data.isEliminated() : true;
         }
     }
 
@@ -598,7 +612,7 @@ public final class BedwarsGame extends AbstractGame{
                         this.alertBedDestruction(team, (String)null, (String)null);
                     } else {
                         PlayerData data = (PlayerData)this.player_data.get(destroyer.getUniqueId());
-                        if (data == null || data.isSpectator) {
+                        if (data == null || data.isSpectator()) {
                             return false;
                         }
 
@@ -620,7 +634,7 @@ public final class BedwarsGame extends AbstractGame{
                         String breakMessage = "§lBED DESTRUCTION > " + bwEvent.getBreakMessage();
                         String lostMessage = "§lBED DESTRUCTION > §7Your bed was destroyed by " + this.getDisplayName(owner);
                         this.alertBedDestruction(team, breakMessage, lostMessage);
-                        owner.getStatisticManager().getCoinsReward().increment(20);
+                        owner.getStatisticManager().getCoinsReward(20).increment(50)
                         destroyer.sendMessage("§6+20 coins! (Bed Destroyed)");
                     }
 
@@ -666,12 +680,12 @@ public final class BedwarsGame extends AbstractGame{
 
         while(var4.hasNext()) {
             PlayerData data = (PlayerData)var4.next();
-            if (!data.isEliminated) {
+            if (!data.isEliminated()) {
                 GamePlayer owner = data.getOwner();
                 Player p = owner.getPlayer();
-                if (data.team == team) {
+                if (data.getTeam() == team) {
                     owner.getStatisticManager().incrementStatistic(GameStatistic.BED_LOST, 1);
-                    if (!data.isDisconnected) {
+                    if (!data.isDisconnected()) {
                         if (lostMessage != null) {
                             p.sendMessage((String)null);
                             p.sendMessage(lostMessage);
@@ -681,7 +695,7 @@ public final class BedwarsGame extends AbstractGame{
                         XSound.ENTITY_WITHER_DEATH.play(p, 1.0F, 1.0F);
                         Titles.sendTitle(p, 5, 30, 5, "§c§lBED DESTROYED!", "You will no longer respawn!");
                     }
-                } else if (!data.isDisconnected && breakMessage != null) {
+                } else if (!data.isDisconnected() && breakMessage != null) {
                     XSound.ENTITY_ENDER_DRAGON_GROWL.play(p, 1.0F, 1.0F);
                     p.sendMessage((String)null);
                     p.sendMessage(breakMessage);
@@ -702,7 +716,7 @@ public final class BedwarsGame extends AbstractGame{
     }
 
     private String getDisplayName(GamePlayer gp) {
-        return gp.getTeam().getChatColor() + gp.getPlayer().getDisplayName();
+        return gp.getTeam().getColor() + gp.getPlayer().getDisplayName();
     }
 
     public boolean hasBed(Team team) {
@@ -721,7 +735,7 @@ public final class BedwarsGame extends AbstractGame{
             return this.removePlayer(player);
         } else {
             PlayerData data = (PlayerData)this.player_data.get(player.getUniqueId());
-            if (data != null && !data.isDisconnected) {
+            if (data != null && !data.isDisconnected()) {
                 GamePlayer gp = data.getOwner();
                 PlayerManager.clear(player);
                 PlayerManager.resetHealth(player);
@@ -758,14 +772,14 @@ public final class BedwarsGame extends AbstractGame{
             return false;
         } else {
             PlayerData data = (PlayerData)this.player_data.get(player.getUniqueId());
-            return data != null ? data.isDisconnected : false;
+            return data != null ? data.isDisconnected() : false;
         }
     }
 
     public boolean reconnect(Player player) {
         if (!this.isLocked && player != null) {
             PlayerData data = (PlayerData)this.player_data.get(player.getUniqueId());
-            if (data != null && data.isDisconnected) {
+            if (data != null && data.isDisconnected()) {
                 BedwarsPlayer gp = data.getOwner();
                 gp.initPlayer();
                 player.setPlayerTime((long)this.arena.getTime(), false);
@@ -806,7 +820,7 @@ public final class BedwarsGame extends AbstractGame{
 
             while(var3.hasNext()) {
                 PlayerData data = (PlayerData)var3.next();
-                if (!data.isDisconnected) {
+                if (!data.isDisconnected()) {
                     data.getOwner().getPlayer().sendMessage(message);
                 }
             }
@@ -843,7 +857,7 @@ public final class BedwarsGame extends AbstractGame{
             return false;
         } else {
             PlayerData data = (PlayerData)this.player_data.get(player.getUniqueId());
-            return data != null ? data.isInvincible : false;
+            return data != null ? data.isInvincible() : false;
         }
     }
 
@@ -852,7 +866,7 @@ public final class BedwarsGame extends AbstractGame{
             return false;
         } else {
             PlayerData data = (PlayerData)this.player_data.get(player.getUniqueId());
-            return data != null ? data.isSpectator : false;
+            return data != null ? data.isSpectator() : false;
         }
     }
 
@@ -881,8 +895,8 @@ public final class BedwarsGame extends AbstractGame{
 
         while(var2.hasNext()) {
             PlayerData gp = (PlayerData)var2.next();
-            if (!gp.isDisconnected) {
-                result.add(gp.owner);
+            if (!gp.isDisconnected()) {
+                result.add(gp.getOwner());
             }
         }
 
@@ -955,7 +969,7 @@ public final class BedwarsGame extends AbstractGame{
 
         while(var2.hasNext()) {
             PlayerData data = (PlayerData)var2.next();
-            if (data.isSpectator) {
+            if (data.isSpectator()) {
                 data.getOwner().getPlayer().hidePlayer(player);
             }
         }
@@ -1001,7 +1015,7 @@ public final class BedwarsGame extends AbstractGame{
                     scheduler.runTask(Bedwars.getInstance(), () -> {
                         BedwarsGame.this.spawn(player);
                         PlayerManager.setFlying(player, false);
-                        GamePlayerRespawnEvent event = new GamePlayerRespawnEvent(data.owner, "§eYou have respawned!");
+                        GamePlayerRespawnEvent event = new GamePlayerRespawnEvent(data.getOwner(), "§eYou have respawned!");
                         Bukkit.getPluginManager().callEvent(event);
                         Titles.sendTitle(player, 5, 20, 5, "§aRESPAWNED!", "");
                         player.sendMessage(event.getRespawnMessage());
@@ -1054,7 +1068,7 @@ public final class BedwarsGame extends AbstractGame{
             GameTeam gameTeam = teamData.owner;
             gameTeam.getUpgradeManager().apply(gp);
             player.teleport(teamData.spawn);
-            player.setGameMode(GameMode.SURVIVAL);
+            player.setGameMode(org.bukkit.GameMode.SURVIVAL);
         }
     }
 
@@ -1075,7 +1089,7 @@ public final class BedwarsGame extends AbstractGame{
 
         while(var5.hasNext()) {
             PlayerData data = (PlayerData)var5.next();
-            if (!data.isDisconnected) {
+            if (!data.isDisconnected()) {
                 Player player = data.getOwner().getPlayer();
                 player.sendMessage((String)null);
                 player.sendMessage("§lTEAM ELIMINATED > §r" + event.getEliminationMessage());

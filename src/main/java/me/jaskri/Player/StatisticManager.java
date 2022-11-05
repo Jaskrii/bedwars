@@ -3,6 +3,8 @@ package me.jaskri.Player;
 import me.jaskri.API.Game.GameReward;
 import me.jaskri.API.Game.player.Stats.GameStatistic;
 import me.jaskri.API.Game.player.Stats.GameStatisticManager;
+import me.jaskri.Reward.CoinReward;
+import me.jaskri.Reward.ExpReward;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -2,6 +2,7 @@ package me.jaskri.Listener;
 
 import me.jaskri.API.Entity.GameEntityManager;
 import me.jaskri.API.Game.player.GamePlayer;
+import me.jaskri.API.NPC.NpcManager;
 import me.jaskri.API.arena.Region;
 import me.jaskri.Game.AbstractGame;
 import me.jaskri.API.Game.Game;
@@ -9,6 +10,8 @@ import me.jaskri.API.bed.fireball.FireBallExplodeEvent;
 import me.jaskri.API.events.Player.GamePlayerBlockBreakEvent;
 import me.jaskri.API.events.Player.GamePlayerBlockPlaceEvent;
 import me.jaskri.API.events.tnt.TNTExplodeEvent;
+import me.jaskri.Util.BedUtils;
+import me.jaskri.Util.ChatUtils;
 import me.jaskri.bedwars.Bedwars;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -27,7 +30,7 @@ import org.bukkit.metadata.MetadataValue;
 
 import java.util.*;
 
-public class MapListener implements Listener {
+public interface MapListener implements Listener {
 
     private static final Map<Game, Set<Block>> GAME_BLOCKS = new HashMap();
 
@@ -96,7 +99,7 @@ public class MapListener implements Listener {
         Entity entity = event.getEntity();
         if (!(entity instanceof Item) && !(entity instanceof Projectile) && !(entity instanceof Explosive) && !(entity instanceof ArmorStand)) {
             if (!(entity instanceof SplashPotion)) {
-                NPCManagere manager = Bedwars.getInstance().getNPCManager();
+                NpcManager manager = Bedwars.getInstance().getNPCManager();
                 if (!manager.isNPC(event.getEntity())) {
                     GameEntityManager manager2 = Bedwars.getInstance().getEntityManager();
                     if (!manager2.isGameEntity(event.getEntity())) {

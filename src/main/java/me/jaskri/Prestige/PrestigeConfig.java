@@ -2,6 +2,7 @@ package me.jaskri.Prestige;
 
 import me.jaskri.Configuration.Configuration;
 import me.jaskri.API.Prestige.Prestige;
+import me.jaskri.Util.ChatUtils;
 import me.jaskri.bedwars.Bedwars;
 import org.bukkit.configuration.ConfigurationSection;
 

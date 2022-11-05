@@ -1,6 +1,7 @@
 package me.jaskri.Hologram;
 
 import com.google.common.base.Preconditions;
+import me.jaskri.Util.ChatUtils;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;

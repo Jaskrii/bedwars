@@ -1,6 +1,7 @@
 package me.jaskri.Game;
 
 import com.google.common.base.Preconditions;
+import me.jaskri.API.Trap.TrapManger;
 import me.jaskri.API.arena.Arena;
 import me.jaskri.API.Game.Game;
 import me.jaskri.API.Game.GameManager;
@@ -13,6 +14,7 @@ import me.jaskri.API.Trap.Trap;
 import me.jaskri.API.User.Statistics;
 import me.jaskri.API.User.User;
 import me.jaskri.API.User.UserStatistics;
+import me.jaskri.ScoreBoard.Game.GameScoreboard;
 import me.jaskri.bedwars.Bedwars;
 import me.jaskri.bedwars.settings.GameSettings;
 import org.bukkit.Bukkit;
@@ -111,13 +113,13 @@ public class BedwarsGameManager implements GameManager {
                             int coins;
                             if (BedwarsGameManager.this.currentTime % settings.timePlayedForExpReward() == 0L) {
                                 coins = settings.getExpReward();
-                                gpx.getStatisticManager().getExpReward().increment(coins);
+                                gpx.getStatisticManager().getExpReward(50).increment(coins);
                                 playerx.sendMessage("§b+" + coins + " Bed Wars Experience (Time Played)");
                             }
 
                             if (BedwarsGameManager.this.currentTime % settings.timePlayedForCoinsReward() == 0L) {
                                 coins = settings.getCoinsReward();
-                                gpx.getStatisticManager().getCoinsReward().increment(coins);
+                                gpx.getStatisticManager().getCoinsReward(5).increment(coins);
                                 playerx.sendMessage("§6+" + coins + " coins! (Time Played)");
                             }
                         }
@@ -130,7 +132,7 @@ public class BedwarsGameManager implements GameManager {
                     label102:
                     while(true) {
                         Location spawn;
-                        TrapManager manager;
+                        TrapManger manager;
                         List traps;
                         GameTeam team;
                         do {
@@ -187,7 +189,7 @@ public class BedwarsGameManager implements GameManager {
             }).runTaskTimer(Bedwars.getInstance(), 0L, 20L);
             if (this.board != null) {
                 final ScoreBoard.AnimatedTitle title = this.board.getTitle();
-                if (title.getUpdateTicks() > 0L) {
+                if (title.getClass() > 0L) {
                     this.titleTask = (new BukkitRunnable() {
                         public void run() {
                             Iterator var1 = BedwarsGameManager.this.game.getPlayers().iterator();
@@ -198,13 +200,13 @@ public class BedwarsGameManager implements GameManager {
                                 if (board != null) {
                                     Objective obj = board.getObjective(DisplaySlot.SIDEBAR);
                                     if (obj != null) {
-                                        obj.setDisplayName(title.next());
+                                        obj.setDisplayName(title.getClass());
                                     }
                                 }
                             }
 
                         }
-                    }).runTaskTimerAsynchronously(Bedwars.getInstance(), 0L, title.getUpdateTicks());
+                    }).runTaskTimerAsynchronously(Bedwars.getInstance(), 0L, title.getClass());
                 }
             }
 
