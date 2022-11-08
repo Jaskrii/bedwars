@@ -3,6 +3,8 @@ package me.jaskri.ScoreBoard.Waiting;
 import me.jaskri.API.ScoreBoard.ScoreboardAnimatedTitle;
 import me.jaskri.ScoreBoard.AbstractScoreboard;
 import me.jaskri.API.Game.Game;
+import me.jaskri.Util.ChatUtils;
+import me.jaskri.Util.ScoreboardUtils;
 import me.jaskri.bedwars.Bedwars;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -121,7 +123,7 @@ public class WaitingScoreboard extends AbstractScoreboard {
         if (game != null && players != null) {
             Scoreboard board = this.getBukkitBoard(game);
             Team players_counter = board.getTeam("Players");
-            players_counter.setSuffix(ChatColor.GREEN + "" + players.size() + "/" + game.getMode().getGameMax());
+            players_counter.setSuffix(ChatColor.GREEN + "" + players.size() + "/" + game.getMode().getValue());
             String text = this.getCountdownText(game);
             if (text == null) {
                 text = "Waiting...";

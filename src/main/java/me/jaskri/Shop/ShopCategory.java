@@ -3,6 +3,7 @@ package me.jaskri.Shop;
 import me.jaskri.API.Game.player.GamePlayer;
 import me.jaskri.API.Shop.Item.Buyable;
 import me.jaskri.Manager.ItemManager;
+import me.jaskri.Util.ShopUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;

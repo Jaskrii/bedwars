@@ -7,6 +7,9 @@ import me.jaskri.API.Shop.Item.ItemCost;
 import me.jaskri.API.Shop.Item.ItemDescription;
 import me.jaskri.API.events.Player.GamePlayerItemBuyEvent;
 import me.jaskri.Manager.ItemManager;
+import me.jaskri.Util.ShopUtils;
+import me.jaskri.Util.TeamUtils;
+import me.jaskri.Util.XSound;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -69,7 +72,7 @@ public class ArmorShopItem extends AbstractShopItem{
     }
 
     public ShopItemType getShopItemType() {
-        return ShopItemType.ARMOR;
+        return ShopItemType.fromString(ArmorType);
     }
 
     public ArmorType getArmorType() {

@@ -7,6 +7,8 @@ import me.jaskri.API.Prestige.Prestige;
 import me.jaskri.API.ScoreBoard.Lobby.LobbyScoreBoard;
 import me.jaskri.API.User.User;
 import me.jaskri.API.User.UserStatistics;
+import me.jaskri.Util.ChatUtils;
+import me.jaskri.Util.ScoreboardUtils;
 import me.jaskri.bedwars.Bedwars;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

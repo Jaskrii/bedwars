@@ -2,11 +2,15 @@ package me.jaskri.Shop.Item;
 
 import com.google.common.base.Preconditions;
 import me.jaskri.API.Game.player.GamePlayer;
+import me.jaskri.API.Shop.Item.Item;
 import me.jaskri.API.Shop.Item.ItemCost;
 import me.jaskri.API.Shop.Item.ItemDescription;
 import me.jaskri.API.Team.Team;
 import me.jaskri.API.events.Player.GamePlayerItemBuyEvent;
 import me.jaskri.Manager.ItemManager;
+import me.jaskri.Util.ShopUtils;
+import me.jaskri.Util.TeamUtils;
+import me.jaskri.Util.XSound;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -83,7 +87,7 @@ public class ShopItem extends AbstractShopItem{
     }
 
     public ShopItemType getShopItemType() {
-        return ShopItemType.ITEM;
+        return ShopItemType.fromString(Item);
     }
 
     public boolean onBuy(GamePlayer gp) {

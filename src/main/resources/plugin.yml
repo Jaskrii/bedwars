@@ -4,3 +4,11 @@ main: me.jaskri
 api-version: 1.19
 authors: [ jaskri ]
 description: plugin bedwars 1.19
+
+
+commands:
+  Bedwars:
+    aliases: [bw]
+  Rejoin:
+  Shout:
+  Play:

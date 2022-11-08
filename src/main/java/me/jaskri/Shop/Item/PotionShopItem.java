@@ -1,10 +1,21 @@
 package me.jaskri.Shop.Item;
 
+import com.google.common.base.Preconditions;
 import me.jaskri.API.Game.player.GamePlayer;
+import me.jaskri.API.Shop.Item.ItemCost;
+import me.jaskri.API.Shop.Item.ItemDescription;
 import me.jaskri.API.events.Player.GamePlayerItemBuyEvent;
+import me.jaskri.Manager.ItemManager;
+import me.jaskri.Util.ShopUtils;
+import me.jaskri.Util.Version;
+import me.jaskri.Util.XSound;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.*;
 
 public class PotionShopItem extends AbstractShopItem{
 
@@ -69,7 +80,7 @@ public class PotionShopItem extends AbstractShopItem{
     }
 
     public ShopItemType getShopItemType() {
-        return ShopItemType.POTION;
+        return ShopItemType.fromString(Potion);
     }
 
     public boolean onBuy(GamePlayer gp) {

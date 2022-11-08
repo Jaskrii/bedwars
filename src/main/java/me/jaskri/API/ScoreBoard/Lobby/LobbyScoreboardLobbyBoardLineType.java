@@ -16,7 +16,7 @@ public enum LobbyScoreboardLobbyBoardLineType {
 
     private static final Map<String, LobbyScoreboardLobbyBoardLineType> BY_NAME = new HashMap(9);
 
-    private LobbyScoreboard$LobbyBoardLineType() {
+    private LobbyScoreboardLobbyBoardLineType() {
     }
 
     public static LobbyScoreboardLobbyBoardLineType fromString(String type) {

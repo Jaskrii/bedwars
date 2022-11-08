@@ -2,6 +2,9 @@ package me.jaskri.Listener;
 
 import me.jaskri.API.Game.Game;
 import me.jaskri.API.Game.player.GamePlayer;
+import me.jaskri.API.NPC.Npc;
+import me.jaskri.API.NPC.Shopkeeper;
+import me.jaskri.API.NPC.Upgrader;
 import me.jaskri.API.Shop.Category;
 import me.jaskri.API.Shop.Item.Buyable;
 import me.jaskri.API.Shop.QuickBuy;
@@ -15,6 +18,7 @@ import me.jaskri.API.events.quickbuy.QuickBuyCloseEvent;
 import me.jaskri.API.events.quickbuy.QuickBuyEditEvent;
 import me.jaskri.bedwars.Bedwars;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.NPC;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -35,7 +39,7 @@ public class ShopListener implements Listener {
     @EventHandler
     public void onGamePlayerDamageNPC(EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof Player) {
-            NPC npc = Bedwars.getInstance().getNPCManager().getNPC(event.getEntity());
+            Npc npc = Bedwars.getInstance().getNPCManager().getNPC(event.getEntity());
             if (npc != null) {
                 this.openNPCShop((Player)event.getDamager(), npc);
                 event.setCancelled(true);

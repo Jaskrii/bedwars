@@ -4,12 +4,14 @@ import com.google.common.base.Preconditions;
 import me.jaskri.API.Game.Game;
 import me.jaskri.API.Team.GameTeam;
 import me.jaskri.API.Team.Team;
+import me.jaskri.API.Trap.TrapManger;
 import me.jaskri.API.Upgrade.UpgradeManager;
+import me.jaskri.Trap.TeamTrapGenerator;
 
 public class BedwarsTeam implements GameTeam {
 
     private final UpgradeManager upgradeManager = new TeamUpgradeManager();
-    private final TrapManager trapsManager = new TeamTrapManager();
+    private final TrapManger trapsManager = new TeamTrapGenerator();
     private final Game game;
     private final Team team;
 
@@ -32,7 +34,7 @@ public class BedwarsTeam implements GameTeam {
         return this.upgradeManager;
     }
 
-    public TrapManager getTrapManager() {
+    public TrapManger getTrapManager() {
         return this.trapsManager;
     }
 }

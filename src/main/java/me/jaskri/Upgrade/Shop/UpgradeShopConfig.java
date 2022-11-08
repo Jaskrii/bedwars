@@ -15,6 +15,8 @@ import me.jaskri.Configuration.Configuration;
 import me.jaskri.Upgrade.Shop.Item.TieredUpgradeShopItem;
 import me.jaskri.Upgrade.Shop.Item.TrapShopItem;
 import me.jaskri.Upgrade.Shop.Item.UpgradeShopItem;
+import me.jaskri.Util.ConfigUtils;
+import me.jaskri.Util.XMaterial;
 import me.jaskri.bedwars.Bedwars;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.util.NumberConversions;
@@ -73,7 +75,7 @@ public class UpgradeShopConfig extends Configuration {
 
     private TieredUpgradeItem getTieredUpgradeItem(String path, GameMode mode) {
         Type type = this.getType(path);
-        if (type != UpgradeShopConfig.Type.TIERED_UPGRADE) {
+        if (type != UpgradeShopConfig.Type.valueOf(TieredUpgrade)) {
             return null;
         } else {
             ConfigurationSection section = this.config.getConfigurationSection(path + ".tiers");
@@ -116,7 +118,7 @@ public class UpgradeShopConfig extends Configuration {
 
     private UpgradeItem getUpgradeItem(String path, GameMode mode) {
         Type type = this.getType(path);
-        if (type != UpgradeShopConfig.Type.UPGRADE) {
+        if (type != UpgradeShopConfig.Type.valueOf(Upgrade)) {
             return null;
         } else {
             Upgrade upgrade = Bedwars.getInstance().getUpgradesManager().getUpgrade(this.config.getString(path + ".upgrade"));
@@ -141,7 +143,7 @@ public class UpgradeShopConfig extends Configuration {
 
     private TrapItem getTrapItem(String path, GameMode mode) {
         Type type = this.getType(path);
-        if (type != UpgradeShopConfig.Type.TRAP) {
+        if (type != UpgradeShopConfig.Type.valueOf(Trap)) {
             return null;
         } else {
             Trap upgrade = Bedwars.getInstance().getUpgradesManager().getTrapUpgrade(this.config.getString(path + ".trap"));
@@ -164,7 +166,7 @@ public class UpgradeShopConfig extends Configuration {
     }
 
     private Type getType(String path) {
-        return UpgradeShopConfig.Type.getByName(this.config.getString(path + ".upgrade-type"));
+        return UpgradeShopConfig.Type.valueOf(getName().config.getString(path + ".upgrade-type"));
     }
 
     public void saveDefaultConfig() {

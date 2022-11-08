@@ -14,7 +14,7 @@ public class FireBallExplodeEvent extends FireBallEvent implements Cancellable {
     private Collection<Entity> entities;
     private boolean isCancelled;
 
-    public FireballExplodeEvent(GamePlayer owner, Fireball fireball, Collection<Entity> entities) {
+    public FireBallExplodeEvent (GamePlayer owner, Fireball fireball, Collection<Entity> entities) {
         (owner, fireball);
         this.entities = entities;
     }

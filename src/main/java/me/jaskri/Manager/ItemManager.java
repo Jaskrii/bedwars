@@ -18,7 +18,7 @@ public class ItemManager {
 
     private static final MethodHandle SET_UNBREAKABLE;
     private static final MethodHandle IS_UNBREAKABLE;
-    private static final MethodHandle SPIGOT;
+    private static final MethodHandles SPIGOT;
     private final ItemStack item;
     private ItemMeta meta;
     private List<String> lore;
@@ -168,18 +168,18 @@ public class ItemManager {
     }
 
     private Object spigot(ItemMeta meta) throws Throwable {
-        return SPIGOT.invoke(meta);
+        return SPIGOT.invoker(meta);
     }
 
     static {
         MethodHandles.Lookup lookup = MethodHandles.lookup();
         MethodHandles spigot = null;
-        MethodHandles method1 = null;
-        MethodHandles method2 = null;
+        MethodHandle method1 = null;
+        MethodHandle method2 = null;
         if (!Version.getVersion().isNewAPI()) {
             try {
                 Class<?> spigot_clazz = Class.forName("org.bukkit.inventory.meta.ItemMeta.Spigot");
-                spigot = lookup.findVirtual(ItemMeta.class, "spigot", MethodType.methodType().methodType(spigot_clazz));
+                spigot = lookup.findVirtual(ItemMeta, "spigot", MethodType.methodType(spigot_clazz));
                 method1 = lookup.findVirtual(spigot_clazz, "setUnbreakable", MethodType.methodType(Void.TYPE, Boolean.TYPE));
                 method2 = lookup.findVirtual(spigot_clazz, "isUnbreakable", MethodType.methodType(Boolean.TYPE));
             } catch (Exception var5) {

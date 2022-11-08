@@ -77,10 +77,10 @@ public class ScoreboardConfig extends Configuration {
                                         case TEXT:
                                             board.setText(score, value);
                                             break;
-                                        case TEAM:
+                                        case Team:
                                             board.setTeam(score, Team.getByName(value));
                                             break;
-                                        case STATICS:
+                                        case Statistics:
                                             board.setStatistic(score, GameStatistic.fromString(value));
                                     }
 

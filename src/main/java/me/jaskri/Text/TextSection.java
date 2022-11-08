@@ -1,6 +1,7 @@
 package me.jaskri.Text;
 
 import me.jaskri.Text.Style.TextAlign;
+import me.jaskri.Util.TextUtils;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;

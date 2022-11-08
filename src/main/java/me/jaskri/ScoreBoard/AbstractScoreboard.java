@@ -2,6 +2,7 @@ package me.jaskri.ScoreBoard;
 
 import com.google.common.base.Preconditions;
 import me.jaskri.API.ScoreBoard.ScoreBoard;
+import me.jaskri.Util.ChatUtils;
 import org.bukkit.scoreboard.DisplaySlot;
 
 import java.util.HashMap;
@@ -17,7 +18,7 @@ public abstract class AbstractScoreboard implements ScoreBoard {
     public AbstractScoreboard(ScoreBoard.AnimatedTitle title) {
         Preconditions.checkNotNull(title, "Scoreboard title cannot be null!");
         this.title = title;
-        this.display = title.next();
+        this.display = title.getClass();
         this.slot = DisplaySlot.SIDEBAR;
     }
 

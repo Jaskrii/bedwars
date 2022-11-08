@@ -56,7 +56,7 @@ public class TeamUpgradeManager implements UpgradeManager {
                     }
 
                     upgrade = (Upgrade)var3.next();
-                } while(predicate != null && !predicate.test(upgrade));
+                } while(predicate != null && !predicate.evaluate(upgrade));
 
                 upgrade.apply(gp);
             }

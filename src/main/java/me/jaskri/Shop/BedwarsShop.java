@@ -8,11 +8,13 @@ import me.jaskri.API.Shop.Shop;
 import me.jaskri.API.User.User;
 import me.jaskri.API.events.Shop.ShopCategoryOpenEvent;
 import me.jaskri.API.events.quickbuy.QuickBuyOpenEvent;
+import me.jaskri.Util.XMaterial;
 import me.jaskri.bedwars.Bedwars;
 import me.jaskri.Manager.ItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -56,7 +58,7 @@ public class BedwarsShop implements Shop {
         if (gp != null && this.isValidIndex(index)) {
             Category category = (Category)this.categories.get(index);
             Player player = gp.getPlayer();
-            Inventory inv = Bukkit.createInventory((InventoryHolder)null, 54, category.getName());
+            Inventory inv = Bukkit.createInventory((InventoryHolder) null, 54, category.getName());
             if (category instanceof me.jaskri.QuickBuy.QuickBuy) {
                 User user = Bedwars.getInstance().getUser(player);
                 if (user == null) {

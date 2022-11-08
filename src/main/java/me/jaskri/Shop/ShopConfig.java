@@ -6,6 +6,9 @@ import me.jaskri.API.Game.player.GamePlayer;
 import me.jaskri.API.Shop.Category;
 import me.jaskri.API.Shop.Item.*;
 import me.jaskri.Shop.Item.*;
+import me.jaskri.Util.ConfigUtils;
+import me.jaskri.Util.XEnchantment;
+import me.jaskri.Util.XMaterial;
 import me.jaskri.bedwars.API.Shop.Item.*;
 import me.jaskri.API.Shop.QuickBuy;
 import me.jaskri.API.Shop.Shop;
@@ -19,6 +22,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.NumberConversions;
@@ -155,9 +159,9 @@ public class ShopConfig extends Configuration {
                     if (slot > 0) {
                         String path = "Shop." + name + "." + key;
                         ShopItemType itemType = ShopItemType.fromString(this.config.getString(path + ".item-type"));
-                        if (itemType != null && itemType != ShopItemType.CUSTOM) {
+                        if (itemType != null && itemType != ShopItemType) {
                             Buyable buyable = null;
-                            if (itemType == ShopItemType.TIERED) {
+                            if (itemType == ShopItemType) {
                                 buyable = this.getTieredShopItem(path, mode);
                             } else {
                                 buyable = this.getShopItem(path, mode);
@@ -190,12 +194,12 @@ public class ShopConfig extends Configuration {
                 } else {
                     String name = this.config.getString(path + ".name", "BedWars Item");
                     ItemDescription desc = this.utils.getDescription(path + ".description");
-                    if (itemType == ShopItemType.ITEM) {
+                    if (itemType == ShopItemType.fromString(Item)) {
                         return this.getShopItem(path, name, cost, desc, this.config.getBoolean(path + ".permanent"));
-                    } else if (itemType == ShopItemType.ARMOR) {
+                    } else if (itemType == ShopItemType.fromString(ArmorType)) {
                         return this.getArmorItem(path, name, cost, desc);
                     } else {
-                        return itemType == ShopItemType.POTION ? this.getPotionItem(path, name, cost, desc) : null;
+                        return itemType == ShopItemType.fromString(Potion) ? this.getPotionItem(path, name, cost, desc) : null;
                     }
                 }
             }
@@ -205,7 +209,7 @@ public class ShopConfig extends Configuration {
     private TieredItem getTieredShopItem(String path, GameMode mode) {
         if (path != null && this.config.isConfigurationSection(path + ".tiers")) {
             ShopItemType itemType = ShopItemType.fromString(this.config.getString(path + ".item-type"));
-            if (itemType != null && itemType == ShopItemType.TIERED) {
+            if (itemType != null && itemType == ShopItemType.fromString(TieredItem)) {
                 List<ShopItem> items = new ArrayList();
                 Iterator var5 = this.config.getConfigurationSection(path + ".tiers").getKeys(false).iterator();
 

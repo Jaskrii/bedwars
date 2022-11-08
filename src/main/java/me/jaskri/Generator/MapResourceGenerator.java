@@ -194,7 +194,7 @@ public class MapResourceGenerator implements TieredGenerator {
 
     private void dropItem(ItemStack drop) {
         Item item = this.loc.getWorld().dropItem(this.loc, drop);
-        item.getCost(I_BELIEVE_I_CAN_FLY);
+        org.bukkit.entity.Item.setVelocity(I_BELIEVE_I_CAN_FLY);
     }
 
     public void stop() {

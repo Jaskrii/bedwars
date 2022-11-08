@@ -3,6 +3,7 @@ package me.jaskri.Shop;
 import com.google.common.base.Preconditions;
 import me.jaskri.API.Shop.Category;
 import me.jaskri.API.Shop.Item.Buyable;
+import me.jaskri.Util.ShopUtils;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;

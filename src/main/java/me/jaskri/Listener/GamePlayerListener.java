@@ -16,6 +16,7 @@ import me.jaskri.API.Game.player.Stats.GameStatistic;
 import me.jaskri.API.Generator.Resource;
 import me.jaskri.API.Generator.TeamGenerator;
 import me.jaskri.API.Generator.TieredGenerator;
+import me.jaskri.Util.*;
 import me.jaskri.bedwars.API.events.Player.*;
 import me.jaskri.bedwars.Bedwars;
 import me.jaskri.bedwars.BedwarsItems;
@@ -576,7 +577,7 @@ public class GamePlayerListener implements Listener {
                                     gpKiller.getStatisticManager().incrementStatistic(GameStatistic.KILLS, 1);
                                 } else {
                                     gpKiller.getStatisticManager().incrementStatistic(GameStatistic.FINAL_KILLS, 1);
-                                    gpKiller.getStatisticManager().getCoinsReward().increment(5);
+                                    gpKiller.getStatisticManager().getCoinsReward(2).increment();
                                     killer.sendMessage("§6+5 coins! (Final Kill)");
                                 }
                             }
@@ -706,7 +707,7 @@ public class GamePlayerListener implements Listener {
             if (game != null && game.hasStarted() && !game.isSpectator(player)) {
                 GamePlayer gp = game.getGamePlayer(player);
                 BedBug bedbug = Bedwars.getInstance().getEntityManager().createBedBug(game, gp.getTeam(), gp, projectile.getLocation());
-                bedbug.spawn();
+                bedbug.getSpawnCategory();
                 player.sendMessage("§aYou spawned a Bed Bug! It will be removed after 15 seconds!");
                 Bukkit.getScheduler().runTaskLaterAsynchronously(Bedwars.getInstance(), () -> {
                     bedbug.remove();
@@ -823,7 +824,7 @@ public class GamePlayerListener implements Listener {
     }
 
     private String getDisplayName(GamePlayer gp) {
-        return gp.getTeam().getChatColor() + gp.getPlayer().getDisplayName();
+        return gp.getTeam().getColor() + gp.getPlayer().getDisplayName();
     }
 
     static {

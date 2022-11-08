@@ -5,6 +5,7 @@ import me.jaskri.API.Game.GameMode;
 import me.jaskri.API.User.Statistics;
 import me.jaskri.API.User.User;
 import me.jaskri.API.User.UserStatistics;
+import org.bukkit.Statistic;
 
 import java.sql.*;
 import java.util.UUID;

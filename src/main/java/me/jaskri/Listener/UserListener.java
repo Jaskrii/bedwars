@@ -102,10 +102,10 @@ public class UserListener implements Listener {
             }
 
             final ScoreBoard.AnimatedTitle title = board.getTitle();
-            if (title.getUpdateTicks() > 0L) {
+            if (title.getClass() > 0L) {
                 titleUpdate = (new BukkitRunnable() {
                     public void run() {
-                        String next = title.next();
+                        String next = board.getDisplayTitle();
                         Iterator var2 = UserListener.PLAYERS.iterator();
 
                         while(var2.hasNext()) {
@@ -127,7 +127,7 @@ public class UserListener implements Listener {
                         }
 
                     }
-                }).runTaskTimerAsynchronously(Bedwars.getInstance(), 0L, title.getUpdateTicks());
+                }).runTaskTimerAsynchronously(Bedwars.getInstance(), 0L, title.getClass());
             }
         }
 

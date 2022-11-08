@@ -1,10 +1,12 @@
 package me.jaskri.Shop.Item;
 
+import jdk.vm.ci.meta.Value;
 import me.jaskri.API.Game.player.ArmorType;
 import me.jaskri.API.Shop.Item.Item;
 import me.jaskri.API.Shop.Item.TieredItem;
 import org.bukkit.potion.Potion;
 
+import javax.naming.Name;
 import java.beans.Customizer;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +34,7 @@ public class ShopItemType {
 
         for(int var2 = 0; var2 < var1; ++var2) {
             ShopItemType type = var0[var2];
-            BY_NAME.put(type.name().toLowerCase(), type);
+            BY_NAME.put(type.toString(Name).toLowerCase(), type);
         }
 
     }
